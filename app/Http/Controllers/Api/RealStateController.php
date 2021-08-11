@@ -69,5 +69,20 @@ class RealStateController extends Controller
         }
     }
 
-   
+    public function destroy($id) {
+        try {
+
+            $realState = $this->realState->findOrFail($id);
+            $realState->delete();
+
+            return response()->json([
+                'data' => [
+                    'msg' => 'Imovel deletado com sucesso'
+                ]
+                ], 200);
+
+        } catch(\Exception $err) {
+            return response()->json(['error' => $err->getMessage()], 404);
+        }
+    }
 }
