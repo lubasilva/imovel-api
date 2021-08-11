@@ -20,5 +20,23 @@ class RealStateController extends Controller
         return response()->json($realState, 200);
     }
 
-   
+    public function store(Request $request) {
+        $data = $request->all();
+
+        try {
+            $realState = $this->realState->create($data);
+
+            return response()->json([
+                'data' => [
+                    'msg' => 'Imovel cadastrado com sucesso'
+                ]
+                ], 200);
+        } catch(\Exception $err) {
+            return response()->json(['error' => $err->getMessage()], 401);
+        }
+    }
+
+    
+
+
 }
