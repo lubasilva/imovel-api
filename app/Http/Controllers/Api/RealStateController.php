@@ -49,5 +49,25 @@ class RealStateController extends Controller
         }
     }
 
+    public function update($id, Request $request) {
 
+        $data = $request->all();
+
+        $realState = $this->realState->findOrFail($id);
+        $realState->update($data);
+
+        return response()->json([
+            'data' => [
+                'msg' => 'Imovel atualizado com sucesso'
+            ]
+            ], 200);
+
+        try {
+
+        } catch(\Exception $err) {
+            return response()->json(['error' => $err->getMessage()], 404);
+        }
+    }
+
+   
 }
