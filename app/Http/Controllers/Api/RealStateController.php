@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Api\ApiMessages;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RealStateRequest;
 use App\Models\RealState;
@@ -32,7 +33,8 @@ class RealStateController extends Controller
                 ]
                 ], 200);
         } catch(\Exception $err) {
-            return response()->json(['error' => $err->getMessage()], 401);
+            $message = new ApiMessages($err->getMessage());
+            return response()->json([ $message->getMessage()], 404);
         }
     }
 
@@ -45,7 +47,8 @@ class RealStateController extends Controller
             ], 200);
 
         } catch(\Exception $err) {
-            return response()->json(['error' => $err->getMessage()], 404);
+            $message = new ApiMessages($err->getMessage());
+            return response()->json([ $message->getMessage()], 404);
         }
     }
 
@@ -65,7 +68,8 @@ class RealStateController extends Controller
         try {
 
         } catch(\Exception $err) {
-            return response()->json(['error' => $err->getMessage()], 404);
+            $message = new ApiMessages($err->getMessage());
+            return response()->json([ $message->getMessage()], 404);
         }
     }
 
@@ -82,7 +86,8 @@ class RealStateController extends Controller
                 ], 200);
 
         } catch(\Exception $err) {
-            return response()->json(['error' => $err->getMessage()], 404);
+            $message = new ApiMessages($err->getMessage());
+            return response()->json([ $message->getMessage()], 404);
         }
     }
 }
